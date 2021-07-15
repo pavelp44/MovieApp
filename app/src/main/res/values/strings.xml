@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="mainToolbarText">Главная</string>
+    <string name="widowTextView">Черная вдова</string>
+    <string name="lukaTextView">Лука</string>
+    <string name="spiritTextView">Унесенные призраками</string>
 </resources>
