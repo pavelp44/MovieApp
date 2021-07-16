@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_margin="12dp">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:id="@+id/widow">
@@ -43,11 +43,9 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/pngegg" />
-
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_below="@+id/widow"
@@ -92,7 +90,6 @@
             android:id="@+id/spirit">
 
             <ImageView
-                android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/spirit"
@@ -113,6 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/button3"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
