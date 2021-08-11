@@ -12,9 +12,11 @@ class DetailsActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewId = intent.getIntExtra("view", 0)
-        if (viewId != 0) {
-            setContentView(viewId)
+        val item: MovieItem? = intent.getParcelableExtra("movieItem")
+        when (item?.let { getText(it.textResId).toString() }) {
+            "Черная вдова" -> setContentView(R.layout.activity_details_1)
+            "Лука" -> setContentView(R.layout.activity_details_2)
+            "Унесенные призраками" -> setContentView(R.layout.activity_details_3)
         }
     }
 }

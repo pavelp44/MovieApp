@@ -10,7 +10,7 @@
         android:id="@+id/movieRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_movie_main"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item_movie_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
