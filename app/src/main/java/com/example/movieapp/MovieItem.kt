@@ -2,7 +2,9 @@ package com.example.movieapp
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-
+/**
+ * Класс с данными фильмов
+ */
 @Parcelize
 class MovieItem(val imgResId: Int, val textResId: Int, var colorResId: Int) : Parcelable {
     companion object {

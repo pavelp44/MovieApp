@@ -28,7 +28,7 @@ class FavoritesActivity : AppCompatActivity() {
         /**
          * Активен ли режим удаления из избранного
          */
-        private var isDeleteModeActive = false
+        private var deleteModeActive = false
     }
 
     private val recycler by lazy {
@@ -46,10 +46,13 @@ class FavoritesActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    /**
+     * Нажатие кнопки удаления из избранного
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        isDeleteModeActive = isDeleteModeActive.not()
-        recycler.adapter?.notifyItemRangeChanged(0, favouritesList.size)
-        if (isDeleteModeActive) {
+        deleteModeActive = deleteModeActive.not()
+        initAdapter()
+        if (deleteModeActive) {
             findViewById<Button>(R.id.buttonDelete).let { button ->
                 button.visibility = Button.VISIBLE
                 button.setOnClickListener {
@@ -57,9 +60,9 @@ class FavoritesActivity : AppCompatActivity() {
                         itemsToDeleteList.forEach {
                             val position = favouritesList.indexOf(it)
                             favouritesList.removeAt(position)
-                            recycler.adapter?.notifyItemRemoved(position)
                         }
                         itemsToDeleteList.clear()
+                        initAdapter()
                     }
                 }
             }
@@ -69,7 +72,7 @@ class FavoritesActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    class FavouritesVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    open class FavouritesVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var movieImg = itemView.findViewById<ImageView>(R.id.imageView)
         private var movieTitle = itemView.findViewById<TextView>(R.id.textView)
 
@@ -81,10 +84,12 @@ class FavoritesActivity : AppCompatActivity() {
 
     class FavouritesAdapter(
         private val items: List<MovieItem>,
-        private val action: (View, MovieItem, Int) -> Unit  // Функция для выполения действия над item view
+        private val action: (View, MovieItem, Int) -> Unit  // Функция для выполения действий над item recyclerView
     ) : RecyclerView.Adapter<FavouritesVH>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouritesVH {
-            val view = LayoutInflater.from(parent.context)
+            val view = if (deleteModeActive) LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_movie_favorites_checkbox, parent, false)
+            else LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_favorites, parent, false)
             return FavouritesVH(view)
         }
@@ -100,14 +105,15 @@ class FavoritesActivity : AppCompatActivity() {
 
     private fun initRecycler() {
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = FavouritesAdapter(favouritesList) { view, item, position ->
-            if (isDeleteModeActive) {
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        recycler.adapter = FavouritesAdapter(favouritesList) { view, item, _ ->
+            if (deleteModeActive) {
                 val checkBox = view.findViewById<CheckBox>(R.id.checkbox)
-                checkBox.visibility = CheckBox.VISIBLE
-                if (!checkBox.hasOnClickListeners()) {
-                    checkBox.setOnClickListener {
-                        itemsToDeleteList.add(item)
-                    }
+                checkBox.setOnClickListener {
+                    itemsToDeleteList.add(item)
                 }
             }
         }

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R.color.teal_700
 import com.example.movieapp.R.color.white
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val recycler by lazy {
@@ -32,12 +34,10 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+    override fun onBackPressed() {
+        Snackbar.make(recycler, "Вы хотите выйти из приложения?", LENGTH_LONG)
+            .setAction("Да") { finishAffinity() }
+            .show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
