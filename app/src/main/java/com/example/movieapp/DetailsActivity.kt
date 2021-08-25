@@ -12,11 +12,11 @@ class DetailsActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val item: MovieItem? = intent.getParcelableExtra("movieItem")
-        when (item?.let { getText(it.textResId).toString() }) {
-            "Черная вдова" -> setContentView(R.layout.activity_details_1)
-            "Лука" -> setContentView(R.layout.activity_details_2)
-            "Унесенные призраками" -> setContentView(R.layout.activity_details_3)
+        val item: MovieItems? = intent.getParcelableExtra("movieItem")
+        when (item?.let { item.id }) {
+            1 -> setContentView(R.layout.activity_details_1)
+            2 -> setContentView(R.layout.activity_details_2)
+            3 -> setContentView(R.layout.activity_details_3)
         }
     }
 }

@@ -5,4 +5,6 @@
     <string name="widowText">Black Widow</string>
     <string name="lukaText">Luka</string>
     <string name="spiritText">Spirited Away</string>
+    <string name="favouritesActionBarBtn">Favourites</string>
+    <string name="deleteButtonText">Delete</string>
 </resources>

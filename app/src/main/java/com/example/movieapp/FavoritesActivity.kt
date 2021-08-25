@@ -18,12 +18,12 @@ class FavoritesActivity : AppCompatActivity() {
         /**
          * Спиок избранных фильмов
          */
-        var favouritesList = mutableListOf<MovieItem>()
+        var favouritesList = mutableListOf<MovieItems>()
 
         /**
          * Список фильмов, отмеченых для удаления
          */
-        var itemsToDeleteList = mutableListOf<MovieItem>()
+        var itemsToDeleteList = mutableListOf<MovieItems>()
 
         /**
          * Активен ли режим удаления из избранного
@@ -83,8 +83,8 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     class FavouritesAdapter(
-        private val items: List<MovieItem>,
-        private val action: (View, MovieItem, Int) -> Unit  // Функция для выполения действий над item recyclerView
+        private val items: List<MovieItems>,
+        private val action: (View, MovieItems, Int) -> Unit  // Функция для выполения действий над item recyclerView
     ) : RecyclerView.Adapter<FavouritesVH>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouritesVH {
             val view = if (deleteModeActive) LayoutInflater.from(parent.context)

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.movieRecycler)
     }
 
-    private val movies = MovieItem.movies
+    private val movies = MovieItems.getRandomMovies(20)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     class MovieAdapter(
-        private val items: List<MovieItem>,
-        private val action: (View, MovieItem, Int) -> Unit
+        private val items: List<MovieItems>,
+        private val action: (View, MovieItems, Int) -> Unit
     ) : RecyclerView.Adapter<MovieVH>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieVH {
             val view =
@@ -90,7 +90,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                movies[position] = MovieItem(
+                movies[position] = MovieItems(
+                    movies[position].id,
                     movies[position].imgResId,
                     movies[position].textResId,
                     teal_700
