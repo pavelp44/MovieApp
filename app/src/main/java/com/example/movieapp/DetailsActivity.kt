@@ -12,9 +12,11 @@ class DetailsActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewId = intent.getIntExtra("view", 0)
-        if (viewId != 0) {
-            setContentView(viewId)
+        val item: MovieItems? = intent.getParcelableExtra("movieItem")
+        when (item?.let { item.id }) {
+            1 -> setContentView(R.layout.activity_details_1)
+            2 -> setContentView(R.layout.activity_details_2)
+            3 -> setContentView(R.layout.activity_details_3)
         }
     }
 }
